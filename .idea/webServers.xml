@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="c3ac5c46-c9fe-48c1-9b68-43e374d14b10" name="pedidosweb" url="http://localhost/pedidosweb">
-        <fileTransfer mountedRoot="C:\laragon\www\pedidosweb" accessType="MOUNT" port="0" />
+      <webServer id="c3ac5c46-c9fe-48c1-9b68-43e374d14b10" name="pedidosweb" url="http://localhost/pedidosphp">
+        <fileTransfer mountedRoot="C:\laragon\www\pedidosphp" accessType="MOUNT" port="0" />
       </webServer>
     </option>
   </component>

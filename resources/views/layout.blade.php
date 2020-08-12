@@ -10,5 +10,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
+{{--    <div class="container">--}}
+        <div class="jumbotron p-3">
+    {{--        <h1>@yield('cabecalho')</h1>--}}
+            <h1></h1>
+        </div>
+{{--    </div>--}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+        <a class="navbar navbar-expand-lg" href="{{ route('pedidosphp') }}">Home</a>
+        @auth
+            <a href="/sair" class="text-danger">Sair</a>
+        @endauth
+        @guest
+            <a href="/entrar">Entrar</a>
+        @endguest
+    </nav>
+    @yield('conteudo')
 </body>
+</html>
 
