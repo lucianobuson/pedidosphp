@@ -1,6 +1,11 @@
-@extends('layouts.app')
+{{--@extends('layouts.app')--}}
 
 @section('content')
+    <div class="content">
+        <div class="title m-b-md">
+            ALÔ MUNDO
+        </div>
+    </div>
 {{--    <div class="container">--}}
 {{--        <div class="row justify-content-center">--}}
 {{--            <div class="col-md-8">--}}
