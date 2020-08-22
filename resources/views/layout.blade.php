@@ -12,18 +12,25 @@
 <body>
 {{--    <div class="container">--}}
         <div class="jumbotron p-3">
-    {{--        <h1>@yield('cabecalho')</h1>--}}
+            <h1>@yield('cabecalho')</h1>
             <h1></h1>
         </div>
 {{--    </div>--}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
-        <a class="navbar navbar-expand-lg" href="{{ route('pedidosphp') }}">Home</a>
-        @auth
-            <a href="/sair" class="text-danger">Sair</a>
-        @endauth
-        @guest
-            <a href="/entrar">Entrar</a>
-        @endguest
+        <a class="navbar navbar-expand-lg" href="#">Home</a>
+            @auth
+                <a href="#" class="text-danger">Sair</a>
+            @endauth
+            @guest
+                <a href="#">Entrar</a>
+            @endguest
+{{--        <a class="navbar navbar-expand-lg" href="{{ route('pedidosphp') }}">Home</a>--}}
+{{--        @auth--}}
+{{--            <a href="/sair" class="text-danger">Sair</a>--}}
+{{--        @endauth--}}
+{{--        @guest--}}
+{{--            <a href="/entrar">Entrar</a>--}}
+{{--        @endguest--}}
     </nav>
     @yield('conteudo')
 </body>
