@@ -31,7 +31,7 @@
                         Cadastros
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ route('home') }}">Clientes</a>
+                        <a class="dropdown-item" href="{{ route('listar_clientes') }}">Clientes</a>
                         <a class="dropdown-item" href="#">Produtos</a>
                     </div>
                 </li>
