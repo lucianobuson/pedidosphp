@@ -11,14 +11,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <div class="jumbotron p-3 mb-1">
+{{--        <h1>@yield('cabecalho')</h1>--}}
+        <h1>Pedidos Web</h1>
+    </div>
 </head>
 <body>
-{{--    <div class="container">--}}
-        <div class="jumbotron p-3 mb-1">
-            <h1>@yield('cabecalho')</h1>
-            <h1></h1>
-        </div>
-{{--    </div>--}}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
         <a class="navbar-brand" href="{{ route('home') }}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

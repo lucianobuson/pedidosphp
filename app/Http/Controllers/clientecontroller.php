@@ -17,7 +17,7 @@ class clientecontroller extends Controller
         $clientes = cliente::query()->orderBy('nome')->get();
         $mensagem = $request->session()->get('mensagem');
 
-        return view('clientes', compact('clientes', 'mensagem'));
+        return view('clientes.index', compact('clientes', 'mensagem'));
         //
     }
 
@@ -28,7 +28,7 @@ class clientecontroller extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.create');
     }
 
     /**

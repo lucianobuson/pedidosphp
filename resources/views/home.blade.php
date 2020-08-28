@@ -1,8 +1,8 @@
 @extends('layout')
 
-@section('cabecalho')
-    Pedidos Web
-@endsection
+{{--@section('cabecalho')--}}
+{{--    Pedidos Web--}}
+{{--@endsection--}}
 
 {{--@section('conteudo')--}}
 {{--    <div class="container">--}}
