@@ -10,6 +10,7 @@
             </ul>
         </div>
     @endif
+    <div class="container">
     <form method="post">
         @csrf
         <div class="row">
@@ -17,7 +18,9 @@
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" name="nome" id="nome">
             </div>
+        </div>
 
         <button class="btn btn-primary mt-2">Incluir</button>
     </form>
+    </div>
 @endsection

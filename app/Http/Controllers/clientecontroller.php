@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\cliente;
+use App\Http\Requests\ClientesFormRequest;
+use App\Services\IncluirCliente;
 use Illuminate\Http\Request;
 
 class clientecontroller extends Controller
@@ -37,9 +39,12 @@ class clientecontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientesFormRequest $request, IncluirCliente $incluirCliente)
     {
-        //
+        $cliente = $incluirCliente->incluirCliente($request->nome);
+        $request->session()->flash('mensagem', "Cliente {$cliente->id} - {$cliente->nome} incluido com sucesso.");
+
+        return redirect()->route('listar_clientes');
     }
 
     /**
