@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ClientesManutencao
 {
-    public function incluirCliente(string $nome): Cliente
+    public function incluirCliente(string $nome, string $email): Cliente
     {
         $cliente = null;
         DB::beginTransaction();
-        $cliente = Cliente::create(['nome' => $nome]);
+        $cliente = Cliente::create(['nome' => $nome, 'email' => $email]);
         DB::commit();
 
         return $cliente;

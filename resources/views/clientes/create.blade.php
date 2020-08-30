@@ -14,9 +14,13 @@
         <form method="post">
             @csrf
             <div class="row">
-                <div class="col col-8">
+                <div class="col col-4">
                     <label for="nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="nome">
+                </div>
+                <div class="col col-4">
+                    <label for="email">eMail</label>
+                    <input type="text" class="form-control" name="email" id="email">
                 </div>
             </div>
 

@@ -41,7 +41,7 @@ class clientesController extends Controller
      */
     public function store(ClientesFormRequest $request, ClientesManutencao $incluirCliente)
     {
-        $cliente = $incluirCliente->incluirCliente($request->nome);
+        $cliente = $incluirCliente->incluirCliente($request->nome, $request->email);
         $request->session()->flash('mensagem', "Cliente {$cliente->id} - {$cliente->nome} incluido com sucesso.");
 
         return redirect()->route('listar_clientes');
