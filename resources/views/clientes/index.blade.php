@@ -29,8 +29,8 @@
                                 <i class="fas fa-edit"></i>
                             </button>
                         @endauth
-                        @auth
-                            <form method="post" action="/cliente/{{ $cliente->id }}"
+{{--                        @auth--}}
+                            <form method="post" action="/clientes/{{ $cliente->id }}"
                                   onsubmit="return confirm('Tem certeza que deseja excluir {{ addslashes($cliente->nome) }} ?')" >
                                 @csrf
                                 @method('DELETE')
@@ -38,7 +38,7 @@
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             </form>
-                        @endauth
+{{--                        @endauth--}}
                     </span>
                 </li>
             @endforeach

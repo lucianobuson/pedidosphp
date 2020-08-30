@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\cliente;
 use App\Http\Requests\ClientesFormRequest;
-use App\Services\IncluirCliente;
+use App\Services\ClientesManutencao;
 use Illuminate\Http\Request;
 
-class clientecontroller extends Controller
+class clientesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,7 +39,7 @@ class clientecontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientesFormRequest $request, IncluirCliente $incluirCliente)
+    public function store(ClientesFormRequest $request, ClientesManutencao $incluirCliente)
     {
         $cliente = $incluirCliente->incluirCliente($request->nome);
         $request->session()->flash('mensagem', "Cliente {$cliente->id} - {$cliente->nome} incluido com sucesso.");
@@ -87,8 +87,11 @@ class clientecontroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, ClientesManutencao $excluirCliente)
     {
-        //
+        $nomeSerie = $excluirCliente->excluirCliente($request->id);
+
+        $request->session()->flash('mensagem', "Cliente $nomeSerie excluido com sucesso");
+        return redirect()->route('listar_clientes');
     }
 }

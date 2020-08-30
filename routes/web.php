@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/pedidosphp', 'HomeController@index')->name('home');
-Route::get('/clientes', 'clientecontroller@index')->name('listar_clientes');
-Route::get('/clientes/criar', 'clientecontroller@create')->name('form_incluir_cliente');
-Route::post('/clientes/criar', 'clienteController@store');
+Route::get('/clientes', 'clientesController@index')->name('listar_clientes');
+Route::get('/clientes/criar', 'clientesController@create')->name('form_incluir_cliente');
+Route::post('/clientes/criar', 'clientesController@store');
+Route::delete('/clientes/{id}', 'clientesController@destroy');
 
