@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Cliente;
+use App\Pedido;
 use Illuminate\Support\Facades\DB;
 
 class ClientesManutencao
@@ -20,11 +21,16 @@ class ClientesManutencao
     public function excluirCliente(int $clienteId): string
     {
         $clienteNome = '';
-        DB::transaction(function() use($clienteNome, $clienteId) {
-            $cliente = Cliente::find($clienteId);
-            $clienteNome = $cliente->nome;
-            $cliente->delete();
-        });
+        $qtdePedidos = Pedido::where('id_cliente', $clienteId)->count();
+        if ($qtdePedidos > 0) {
+            $clienteNome = '-1';
+        } else {
+            DB::transaction(function () use ($clienteNome, $clienteId) {
+                $cliente = Cliente::find($clienteId);
+                $clienteNome = $cliente->nome;
+                $cliente->delete();
+            });
+        }
 
         return $clienteNome;
     }

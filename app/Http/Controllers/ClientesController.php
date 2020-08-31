@@ -89,9 +89,14 @@ class clientesController extends Controller
      */
     public function destroy(Request $request, ClientesManutencao $excluirCliente)
     {
-        $nomeSerie = $excluirCliente->excluirCliente($request->id);
+        $request->session()->flash('mensagem', "");
+        $nomeCliente = $excluirCliente->excluirCliente($request->id);
+        if ($nomeCliente == "-1") {
+            $request->session()->flash('mensagem', "Há pedidos vinculados a esse cliente.");
+        } else {
+            $request->session()->flash('mensagem', "Cliente $nomeCliente excluido com sucesso.");
+        }
 
-        $request->session()->flash('mensagem', "Cliente $nomeSerie excluido com sucesso");
         return redirect()->route('listar_clientes');
     }
 }
