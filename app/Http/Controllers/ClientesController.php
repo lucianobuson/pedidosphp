@@ -92,7 +92,7 @@ class clientesController extends Controller
         $request->session()->flash('mensagem', "");
         $nomeCliente = $excluirCliente->excluirCliente($request->id);
         if ($nomeCliente == "-1") {
-            $request->session()->flash('mensagem', "Há pedidos vinculados a esse cliente.");
+            $request->session()->flash('mensagem', "Há pedidos vinculados ao cliente.");
         } else {
             $request->session()->flash('mensagem', "Cliente $nomeCliente excluido com sucesso.");
         }
