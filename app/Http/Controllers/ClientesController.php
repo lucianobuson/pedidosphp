@@ -30,7 +30,10 @@ class clientesController extends Controller
      */
     public function create()
     {
-        return view('clientes.create');
+        $inclusao = true;
+        $cliente = new Cliente();
+
+        return view('clientes.create', compact('cliente', 'inclusao'));
     }
 
     /**
@@ -64,9 +67,12 @@ class clientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $inclusao = false;
+        $cliente = cliente::find($id);
+
+        return view('clientes.create', compact('cliente', 'inclusao'));
     }
 
     /**
@@ -76,9 +82,14 @@ class clientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $cliente = cliente::find($id);
+        $cliente->nome = $request->nome;
+        $cliente->email = $request->email;
+        $cliente->save();
+
+        return redirect()->route('listar_clientes');
     }
 
     /**
