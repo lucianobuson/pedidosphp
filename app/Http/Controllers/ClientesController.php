@@ -20,7 +20,6 @@ class clientesController extends Controller
         $mensagem = $request->session()->get('mensagem');
 
         return view('clientes.index', compact('clientes', 'mensagem'));
-        //
     }
 
     /**
@@ -100,7 +99,6 @@ class clientesController extends Controller
      */
     public function destroy(Request $request, ClientesManutencao $excluirCliente)
     {
-        $request->session()->flash('mensagem', "");
         $nomeCliente = $excluirCliente->excluirCliente($request->id);
         if ($nomeCliente == "-1") {
             $request->session()->flash('mensagem', "Há pedidos vinculados ao cliente.");
