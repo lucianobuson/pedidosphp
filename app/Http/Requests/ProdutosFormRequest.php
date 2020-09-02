@@ -13,7 +13,7 @@ class ProdutosFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class ProdutosFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'required|min:3',
+            'preco' => 'required|numeric|between:0.01,1000.00'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'O campo :attribute é obrigatório.',
+            'nome.min' => 'O campo :attribute precisa ter pelo menos três caracteres.',
+            'preco.required' => 'O campo :attribute é obrigatório.',
+            'preco.numeric' => 'O campo :attribute é inválido.',
+            'preco.between' => 'O :attribute tem que estar entre 0,01 e 1000,00.'
         ];
     }
 }

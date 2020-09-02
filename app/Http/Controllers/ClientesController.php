@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\cliente;
+use App\Cliente;
 use App\Http\Requests\ClientesFormRequest;
 use App\Services\ClientesManutencao;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class clientesController extends Controller
      */
     public function index(Request $request)
     {
-        $clientes = cliente::query()->orderBy('nome')->get();
+        $clientes = Cliente::query()->orderBy('nome')->get();
         $mensagem = $request->session()->get('mensagem');
 
         return view('clientes.index', compact('clientes', 'mensagem'));
@@ -69,7 +69,7 @@ class clientesController extends Controller
     public function edit(int $id)
     {
         $inclusao = false;
-        $cliente = cliente::find($id);
+        $cliente = Cliente::find($id);
 
         return view('clientes.create', compact('cliente', 'inclusao'));
     }
@@ -83,7 +83,7 @@ class clientesController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $cliente = cliente::find($id);
+        $cliente = Cliente::find($id);
         $cliente->nome = $request->nome;
         $cliente->email = $request->email;
         $cliente->save();
@@ -100,7 +100,7 @@ class clientesController extends Controller
     public function destroy(Request $request, ClientesManutencao $excluirCliente)
     {
         $nomeCliente = $excluirCliente->excluirCliente($request->id);
-        if ($nomeCliente == "-1") {
+        if ($nomeCliente == "") {
             $request->session()->flash('mensagem', "Há pedidos vinculados ao cliente.");
         } else {
             $request->session()->flash('mensagem', "Cliente $nomeCliente excluido com sucesso.");

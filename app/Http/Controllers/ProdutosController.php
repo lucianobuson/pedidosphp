@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdutosFormRequest;
+use App\Iten;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -11,9 +14,12 @@ class ProdutosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $produtos = Produto::query()->orderBy('nome')->get();
+        $mensagem = $request->session()->get('mensagem');
+
+        return view('produtos.index', compact('produtos', 'mensagem'));
     }
 
     /**
@@ -23,7 +29,10 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        //
+        $inclusao = true;
+        $produto = new Produto();
+
+        return view('produtos.create', compact('produto', 'inclusao'));
     }
 
     /**
@@ -32,9 +41,13 @@ class ProdutosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProdutosFormRequest $request)
     {
-        //
+//        var_dump($request->preco); exit;
+        $produto = Produto::create(['nome' => $request->nome, 'preco' => $request->preco]);
+        $request->session()->flash('mensagem', "Produto {$produto->id} - {$produto->nome} incluido com sucesso.");
+
+        return redirect()->route('listar_produtos');
     }
 
     /**
@@ -54,9 +67,12 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $inclusao = false;
+        $produto = Produto::find($id);
+
+        return view('produtos.create', compact('produto', 'inclusao'));
     }
 
     /**
@@ -68,7 +84,12 @@ class ProdutosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produto::find($id);
+        $produto->nome = $request->nome;
+        $produto->preco = $request->preco;
+        $produto->save();
+
+        return redirect()->route('listar_produtos');
     }
 
     /**
@@ -77,8 +98,18 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $produto = Produto::find($request->id);
+        $nomeProduto = $produto->nome;
+        $qtdeItens = Iten::where('id_produto', $request->id)->count();
+        if ($qtdeItens == 0) {
+            $produto->delete();
+            $request->session()->flash('mensagem', "Produto $nomeProduto excluido com sucesso.");
+        } else {
+            $request->session()->flash('mensagem', "Há itens de pedidos vinculados ao produto.");
+        }
+
+        return redirect()->route('listar_produtos');
     }
 }

@@ -20,19 +20,20 @@ class ClientesManutencao
 
     public function excluirCliente(int $clienteId): string
     {
-        $qtdePedidos = Pedido::where('id_cliente', $clienteId)->count();
+        $clienteNome = '';
         $cliente = Cliente::find($clienteId);
-        $clienteNome = $cliente->nome;
-        if ($qtdePedidos > 0) {
-            $clienteNome = '-1';
-        } else {
+        $qtdePedidos = Pedido::where('id_cliente', $clienteId)->count();
+        if ($qtdePedidos == 0) {
+            $clienteNome = $cliente->nome;
             $cliente->delete();
+        }
+//        if ($qtdePedidos == 0) {
 //            DB::transaction(function () use ($clienteNome, $clienteId) {
 //                $cliente = Cliente::find($clienteId);
 //                $clienteNome = $cliente->nome;
 //                $cliente->delete();
 //            });
-        }
+//        }
 
         return $clienteNome;
     }
