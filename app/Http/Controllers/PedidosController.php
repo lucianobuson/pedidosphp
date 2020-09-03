@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class PedidosController extends Controller
@@ -11,9 +12,16 @@ class PedidosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+//        $pedidos = Pedido::query()->orderBy('id')->get();
+        $pedidos = Pedido::query()
+                            ->leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')
+                            ->orderBy('pedidos.id')->get(['pedidos.id', 'pedidos.id_cliente', 'clientes.nome', 'pedidos.data_pedido', 'pedidos.total']);
+//        var_dump($pedidos); exit;
+        $mensagem = $request->session()->get('mensagem');
+
+        return view('pedidos.index', compact('pedidos', 'mensagem'));
     }
 
     /**

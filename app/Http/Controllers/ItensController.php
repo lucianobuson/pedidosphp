@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pedido;
 use Illuminate\Http\Request;
 
 class ItensController extends Controller
@@ -11,9 +12,12 @@ class ItensController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $pedidoId)
     {
-        //
+        $pedido = Pedido::find($pedidoId);
+        $itens = $pedido->itens;
+
+        return view('itens.index', compact($pedido, $itens));
     }
 
     /**

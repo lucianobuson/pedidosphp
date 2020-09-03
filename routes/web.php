@@ -29,3 +29,7 @@ Route::get('/produtos/alterar/{id}', 'produtosController@edit')->name('alterar_p
 Route::post('/produtos/alterar/{id}', 'produtosController@update');
 Route::delete('/produtos/{id}', 'produtosController@destroy');
 
+Route::get('/pedidos', 'pedidosController@index')->name('listar_pedidos');
+Route::get('/pedidos/criar', 'pedidosController@create')->name('incluir_pedido');
+Route::get('/pedidos/alterar/{id}', 'pedidosController@edit')->name('alterar_pedido');
+Route::delete('/pedidos/{id}', 'pedidosController@destroy');

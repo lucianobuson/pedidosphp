@@ -36,7 +36,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pedidos</a>
+                    <a class="nav-link" href="{{ route('listar_pedidos') }}">Pedidos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Ajuda</a>
