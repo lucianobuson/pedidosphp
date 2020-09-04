@@ -20,8 +20,10 @@
                 <tr>
                     <td style="text-align:right; padding: 0 8px 0 0;" id="numped-{{ $pedido->id }}">{{ $pedido->id }}</td>
                     <td id="idcliente-{{ $pedido->id_cliente }}">{{ $pedido->id_cliente }} - {{ $pedido->nome }}</td>
-                    <td>{{ $pedido->data_pedido }}</td>
-{{--                    <td>{{ date_format($pedido->data_pedido, "d/m/Y") }}</td>--}}
+
+{{--                    <td>{{ date_format(date($pedido->data_pedido), 'd/m/Y') }}</td>--}}
+                    <td>{{ date('d/m/Y', strtotime($pedido->data_pedido)) }}</td>
+
                     <td style="text-align:right;">{{ number_format($pedido->total, 2, ',', '.') }}</td>
                     <td style="text-align:right;">
                         <span class="d-flex">

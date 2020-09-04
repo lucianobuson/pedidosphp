@@ -8,6 +8,7 @@ class Pedido extends Model
 {
     public $timestamps = false;
     protected $fillable = ['id_cliente', 'data_pedido', 'total'];
+//    protected $dates = ['data_pedido'];
 
     public function itens()
     {
