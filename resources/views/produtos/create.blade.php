@@ -20,15 +20,11 @@
                 </div>
                 <div class="col col-4">
                     <label for="preco">Preço</label>
-                    <input type="text" class="form-control" name="preco" id="preco" value="{{ $produto->preco }}">
+                    <input type="number" placeholder="0,00" pattern="^\d*(\.\d{0,2})?$" min="0.01" max="1000.00" step="0.01" class="form-control" name="preco" id="preco" value="{{ $produto->preco }}">
                 </div>
             </div>
 
-            @if($inclusao)
-                <button class="btn btn-primary mt-2">Incluir</button>
-            @else
-                <button class="btn btn-primary mt-2">Alterar</button>
-            @endif
+            <button class="btn btn-primary mt-2">Gravar</button>
         </form>
     </div>
 @endsection

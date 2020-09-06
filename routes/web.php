@@ -31,5 +31,7 @@ Route::delete('/produtos/{id}', 'produtosController@destroy');
 
 Route::get('/pedidos', 'pedidosController@index')->name('listar_pedidos');
 Route::get('/pedidos/criar', 'pedidosController@create')->name('incluir_pedido');
+Route::post('/pedidos/criar', 'pedidosController@store');
 Route::get('/pedidos/alterar/{id}', 'pedidosController@edit')->name('alterar_pedido');
+Route::post('/pedidos/alterar/{id}', 'pedidosController@update');
 Route::delete('/pedidos/{id}', 'pedidosController@destroy');

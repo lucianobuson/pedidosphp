@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PedidosFormRequest;
 use App\Pedido;
 use Illuminate\Http\Request;
 
@@ -14,11 +15,9 @@ class PedidosController extends Controller
      */
     public function index(Request $request)
     {
-//        $pedidos = Pedido::query()->orderBy('id')->get();
         $pedidos = Pedido::query()
                             ->leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')
                             ->orderBy('pedidos.id')->get(['pedidos.id', 'pedidos.id_cliente', 'clientes.nome', 'pedidos.data_pedido', 'pedidos.total']);
-//        var_dump($pedidos); exit;
         $mensagem = $request->session()->get('mensagem');
 
         return view('pedidos.index', compact('pedidos', 'mensagem'));
@@ -31,7 +30,9 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+        $pedido = new Pedido();
+
+        return view('pedidos.create', compact('pedido'));
     }
 
     /**
@@ -40,9 +41,12 @@ class PedidosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PedidosFormRequest $request)
     {
-        //
+        $pedido = Pedido::create(['id_cliente' => $request->idCliente, 'data_pedido' => $request->dataPedido, 'total' => 0]);
+        $request->session()->flash('mensagem', "Pedido número {$pedido->id} incluido com sucesso.");
+
+        return view('pedidos.create', compact('pedido'));
     }
 
     /**
@@ -51,7 +55,7 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }
@@ -62,9 +66,15 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $pedido = Pedido::select('pedidos.id as id_pedido', 'pedidos.id_cliente', 'clientes.nome as nome_cliente',
+                                 'pedidos.data_pedido', 'pedidos.total as total_pedido')->
+                          leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')->
+                          where('pedidos.id', $id)->
+                          first();
+
+        return view('pedidos.create', compact('pedido'));
     }
 
     /**
@@ -74,9 +84,16 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PedidosFormRequest $request, int $id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $pedido->id_cliente = $request->idCliente;
+        $pedido->data_pedido = $request->dataPedido;
+        $pedido->save();
+
+        return redirect()->route('listar_pedidos');
+
+//        return view('pedidos.create', compact('pedido'));
     }
 
     /**
@@ -85,7 +102,7 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         //
     }

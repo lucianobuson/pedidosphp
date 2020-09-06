@@ -29,10 +29,9 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        $inclusao = true;
         $produto = new Produto();
 
-        return view('produtos.create', compact('produto', 'inclusao'));
+        return view('produtos.create', compact('produto'));
     }
 
     /**
@@ -43,7 +42,6 @@ class ProdutosController extends Controller
      */
     public function store(ProdutosFormRequest $request)
     {
-//        var_dump($request->preco); exit;
         $produto = Produto::create(['nome' => $request->nome, 'preco' => $request->preco]);
         $request->session()->flash('mensagem', "Produto {$produto->id} - {$produto->nome} incluido com sucesso.");
 
@@ -69,10 +67,9 @@ class ProdutosController extends Controller
      */
     public function edit(int $id)
     {
-        $inclusao = false;
         $produto = Produto::find($id);
 
-        return view('produtos.create', compact('produto', 'inclusao'));
+        return view('produtos.create', compact('produto'));
     }
 
     /**
@@ -82,7 +79,7 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProdutosFormRequest $request, int $id)
     {
         $produto = Produto::find($id);
         $produto->nome = $request->nome;

@@ -24,11 +24,7 @@
                 </div>
             </div>
 
-            @if($inclusao)
-                <button class="btn btn-primary mt-2">Incluir</button>
-            @else
-                <button class="btn btn-primary mt-2">Alterar</button>
-            @endif
+            <button class="btn btn-primary mt-2">Gravar</button>
         </form>
     </div>
 @endsection

@@ -13,7 +13,7 @@ class PedidosFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class PedidosFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'idCliente' => 'required|exists:clientes,id',
+            'dataPedido' => 'required|date|after:yesterday'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'idCliente.required' => 'O campo cliente é obrigatório.',
+            'idCliente.exists' => 'O cliente não está cadastrado.',
+            'dataPedido.required' => 'O campo data do pedido é obrigatório.',
+            'dataPedido.after' => 'A data do pedido tem que ser maior ou igual a hoje.'
         ];
     }
 }

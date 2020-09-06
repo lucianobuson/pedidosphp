@@ -29,10 +29,9 @@ class clientesController extends Controller
      */
     public function create()
     {
-        $inclusao = true;
         $cliente = new Cliente();
 
-        return view('clientes.create', compact('cliente', 'inclusao'));
+        return view('clientes.create', compact('cliente'));
     }
 
     /**
@@ -55,9 +54,11 @@ class clientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        return compact('cliente');
     }
 
     /**
@@ -68,10 +69,9 @@ class clientesController extends Controller
      */
     public function edit(int $id)
     {
-        $inclusao = false;
         $cliente = Cliente::find($id);
 
-        return view('clientes.create', compact('cliente', 'inclusao'));
+        return view('clientes.create', compact('cliente'));
     }
 
     /**
@@ -81,7 +81,7 @@ class clientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(ClientesFormRequest $request, int $id)
     {
         $cliente = Cliente::find($id);
         $cliente->nome = $request->nome;
