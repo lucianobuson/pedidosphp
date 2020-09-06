@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Iten extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['id_pedido', 'id_produto', 'quantidade', 'preco', 'total'];
+    protected $primaryKey = 'id';
+    protected $fillable = ['id', 'id_pedido', 'id_produto', 'quantidade', 'preco', 'total'];
 
     public function pedido()
     {

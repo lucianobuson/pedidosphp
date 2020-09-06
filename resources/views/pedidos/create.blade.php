@@ -35,11 +35,12 @@
                 </div>
                 <div class="col col-2">
                     <label for="totalPedido">Total</label>
-                    <input type="number" min="0.01" max="1000.00" step="0.01" class="form-control" name="totalPedido" id="totalPedido" readonly disabled value="{{ $pedido->total_pedido }}">
+                    <input type="number" min="0.01" max="1000.00" step="0.01" class="form-control" name="totalPedido" id="totalPedido" readonly disabled value="{{ number_format($pedido->total_pedido, 2, ',', '.') }}">
                 </div>
             </div>
             <button class="btn btn-primary mt-2">Gravar</button>
             <a href="{{ route('listar_pedidos') }}" class="btn btn-warning mt-2">Voltar</a>
+            <a href="{{ route('listar_itens') }}" class="btn btn-primary mt-2">Itens</a>
         </form>
     </div>
 @endsection
