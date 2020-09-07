@@ -36,5 +36,4 @@ Route::get('/pedidos/alterar/{id}', 'pedidosController@edit')->name('alterar_ped
 Route::post('/pedidos/alterar/{id}', 'pedidosController@update');
 Route::delete('/pedidos/{id}', 'pedidosController@destroy');
 
-erro aqui na rota
-Route::get('/pedidos/alterar/{id}/itens', 'itensController@index')->name('listar_itens');
+Route::get('/pedidos/itens/{id}', 'itensController@index')->name('listar_itens');

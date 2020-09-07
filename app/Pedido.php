@@ -12,7 +12,9 @@ class Pedido extends Model
 
     public function itens()
     {
-        return $this->hasMany(Iten::class);
+//        return $this->hasMany(Iten::class);
+        return $this->hasMany(Iten::class, 'id_pedido');
+//        return $this->hasMany(Iten::class, 'foreign_key', 'id_pedido');
     }
 
 }

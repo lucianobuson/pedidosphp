@@ -15,12 +15,11 @@ class ItensController extends Controller
      */
     public function index(Request $request, int $pedidoId)
     {
-        var_dump($pedidoId); exit;
         $pedido = Pedido::find($pedidoId);
         $itens = $pedido->itens;
         $mensagem = $request->session()->get('mensagem');
 
-        return view('itens.index', compact($pedido, $itens, $mensagem));
+        return view('itens.index', compact('pedido', 'itens', 'mensagem'));
     }
 
     /**
