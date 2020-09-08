@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PedidosFormRequest;
+use App\Iten;
 use App\Pedido;
 use Illuminate\Http\Request;
 
@@ -74,9 +75,15 @@ class PedidosController extends Controller
                           leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')->
                           where('pedidos.id', $id)->
                           first();
-        $itens = $pedido->itens;
 
-        return view('pedidos.create', compact('pedido', $itens));
+        $itens = Iten::select(['itens.id', 'itens.id_produto', 'produtos.nome', 'itens.quantidade', 'itens.preco',
+                               'itens.desconto', 'itens.total'])
+                               ->leftJoin('produtos', 'itens.id_produto', '=', 'produtos.id')
+                               ->where('itens.id_pedido', $id)
+                               ->orderBy('itens.id')
+                               ->get();
+
+        return view('pedidos.create', compact('pedido', 'itens'));
     }
 
     /**
