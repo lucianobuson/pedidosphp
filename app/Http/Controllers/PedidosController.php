@@ -18,6 +18,7 @@ class PedidosController extends Controller
         $pedidos = Pedido::query()
                             ->leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')
                             ->orderBy('pedidos.id')->get(['pedidos.id', 'pedidos.id_cliente', 'clientes.nome', 'pedidos.data_pedido', 'pedidos.total']);
+
         $mensagem = $request->session()->get('mensagem');
 
         return view('pedidos.index', compact('pedidos', 'mensagem'));
@@ -73,8 +74,9 @@ class PedidosController extends Controller
                           leftJoin('clientes', 'pedidos.id_cliente', '=', 'clientes.id')->
                           where('pedidos.id', $id)->
                           first();
+        $itens = $pedido->itens;
 
-        return view('pedidos.create', compact('pedido'));
+        return view('pedidos.create', compact('pedido', $itens));
     }
 
     /**

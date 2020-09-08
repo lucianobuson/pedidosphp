@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('conteudo')
-    @include('mensagem', ['mensagem' => $mensagem])
+{{--    @include('mensagem', ['mensagem' => $mensagem])--}}
 
     <div class="container">
         {{--        @auth--}}
@@ -20,7 +20,7 @@
             @foreach($itens as $item)
                 <tr>
                     <td style="text-align:right; padding: 0 8px 0 0;" id="item-{{ $item->id }}">{{ $item->id }}</td>
-                    <td id="idproduto-{{ $item->id_produto }}">{{ $item->id_produto }} - {{ $item->nome_produto }}</td>
+                    <td id="idproduto-{{ $item->id_produto }}">{{ $item->id_produto }} - {{ $item->nome }}</td>
                     <td style="text-align:right;">{{ number_format($item->quantidade, 2, ',', '.') }}</td>
                     <td style="text-align:right;">{{ number_format($item->preco, 2, ',', '.') }}</td>
                     <td style="text-align:right;">{{ number_format($item->desconto, 2, ',', '.') }}</td>

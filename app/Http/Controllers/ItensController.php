@@ -15,11 +15,22 @@ class ItensController extends Controller
      */
     public function index(Request $request, int $pedidoId)
     {
-        $pedido = Pedido::find($pedidoId);
-        $itens = $pedido->itens;
+        $itens = Iten::select(['itens.id', 'itens.id_produto', 'produtos.nome', 'itens.quantidade', 'itens.preco',
+                               'itens.desconto', 'itens.total'])
+                       ->leftJoin('produtos', 'itens.id_produto', '=', 'produtos.id')
+                       ->where('itens.id_pedido', $pedidoId)
+                       ->orderBy('itens.id')
+                       ->get();
+
         $mensagem = $request->session()->get('mensagem');
 
-        return view('itens.index', compact('pedido', 'itens', 'mensagem'));
+        return view('itens.index', compact('itens', 'mensagem'));
+
+//        $pedido = Pedido::find($pedidoId);
+//        $itens = $pedido->itens;
+//        $mensagem = $request->session()->get('mensagem');
+//
+//        return view('itens.index', compact('pedido', 'itens', 'mensagem'));
     }
 
     /**
