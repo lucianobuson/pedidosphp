@@ -87,4 +87,22 @@
             @endforeach
         </table>
     </div>
+    <script>
+        $("#idCliente").blur(function() {
+            let idcliente = $("#idCliente").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('clientes/postIndex') }}",
+                data: {id: idcliente},
+                success: function(data, status){
+                    alert("Dados: " + data + "\nStatus: " + status);
+                },
+                error: function(data) {
+                    alert('Atenção: ', data);
+                    $("#idCliente").focus();
+                }
+            });
+        });
+    </script>
 @endsection

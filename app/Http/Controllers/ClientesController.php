@@ -108,4 +108,22 @@ class clientesController extends Controller
 
         return redirect()->route('listar_clientes');
     }
+
+    public function postIndex(Request $request)
+    {
+        if ($request->ajax()) {
+            dd($request); exit;
+            $cliente = Cliente::find($request->id);
+            if ($cliente == null) {
+                return response()->json(["Clinte não encontrado."]);
+            }
+            else {
+                return response()->json([$cliente->nome]);
+            }
+        }
+        else
+        {
+            return "Não é ajax.";
+        }
+    }
 }
